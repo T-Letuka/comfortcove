@@ -4,5 +4,14 @@ export default {
   theme: {
     extend: {},
   },
+  screens: {
+    sm: "430px",
+    md: "678px",
+    lg: "1024px",
+    xl: "1280px",
+    "2xl": "1536px",
+    "custom-sm": "500px",
+    "custom-lg": "1200px",
+  },
   plugins: [],
 };

@@ -6,10 +6,12 @@ import Dashboard from "./pages/Dashboard";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Posts from "./pages/Posts";
+import Header from "./Components/Header";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
