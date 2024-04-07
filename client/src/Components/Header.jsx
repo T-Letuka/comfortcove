@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiMagnifyingGlass, HiBars4 } from "react-icons/hi2";
-import { FaMoon } from "react-icons/fa";
-
 import { useState } from "react";
 
 const NavBar = () => {
@@ -19,7 +17,7 @@ const NavBar = () => {
 
   return (
     <div className="border-b-2 flex flex-wrap justify-between items-center">
-      <div className="my-4 flex gap-3 sm:gap-6 md:gap-8 ">
+      <div className="my-4 flex gap-3 sm:gap-6 md:gap-8">
         <Link
           to="/"
           className="bg-gradient-to-r from-[#a2d2ff] via-[#caf0f8] to-[#ffc8dd] border rounded-[12px] px-2 py-2 text mx-2 my-1 font-semibold"
@@ -63,7 +61,7 @@ const NavBar = () => {
                 </Link>
               </li>
             </ul>
-            <Link to="sign-in" onClick={closeMenu}>
+            <Link to="/sign-in" onClick={closeMenu}>
               <button className="border border-[#000000] rounded-xl mx-3 my-5 px-3 py-3 bg-pink-100">
                 Sign In
               </button>
@@ -72,20 +70,26 @@ const NavBar = () => {
         )}
       </div>
 
-      <div className="hidden lg:flex lg:items-center">
-        <ul className="inline-flex gap-6 sm:gap-10 font-semibold mx-[200px] text-[18px]">
+      <div className="hidden lg:flex lg:items-center lg:gap-1">
+        <ul className="inline-flex gap-6 sm:gap-10 font-bold text-[20px]">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="text-black hover:text-[#ff006e]">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" className="text-black hover:text-[#ff006e]">
+              About
+            </Link>
           </li>
           <li>
-            <Link to="/posts">Posts</Link>
+            <Link to="/posts" className="text-black hover:text-[#ff006e]">
+              Posts
+            </Link>
           </li>
         </ul>
-        <Link to="sign-in">
-          <button className="border border-[#000000] rounded-xl mx-[100px] my-5 px-3 py-3">
+        <Link to="/sign-in">
+          <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
             Sign In
           </button>
         </Link>
