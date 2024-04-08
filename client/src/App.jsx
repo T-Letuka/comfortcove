@@ -7,10 +7,13 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Posts from "./pages/Posts";
 import Header from "./Components/Header";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
