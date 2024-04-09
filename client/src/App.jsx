@@ -8,6 +8,7 @@ import Signin from "./pages/Signin";
 import Posts from "./pages/Posts";
 import Header from "./Components/Header";
 import toast, { Toaster } from "react-hot-toast";
+import Footer from "./Components/Footer";
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/posts" element={<Posts />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
