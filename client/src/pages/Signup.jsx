@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (errorMessage) {
@@ -23,15 +24,24 @@ const Signup = () => {
       return setErrorMessage("Please fill out all fields");
     }
     try {
+      setLoading(true);
+      setErrorMessage(null);
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      if (data.success === false) {
+        return setErrorMessage(data.message);
+      }
+      setLoading(false);
+      if (res.ok) {
+        navigate("/sign-in");
+      }
     } catch (error) {
-      console.error("Signup failed:", error);
       setErrorMessage("An error occurred while signing up.");
+      setLoading(false);
     }
   };
 
@@ -84,8 +94,11 @@ const Signup = () => {
                 id="password"
               />
             </div>
-            <button className="border-4 border-[#cdb4db] font-bold rounded-[20px] px-3 py-3 hover:border-[#ff006e]">
-              Sign Up
+            <button
+              className="border-4 border-[#cdb4db] font-bold rounded-[20px] px-3 py-3 hover:border-[#ff006e]"
+              disabled={loading}
+            >
+              {loading ? <span className="pl-3">Loading...</span> : "Sign up"}
             </button>
           </form>
           <div className="mt-5 flex gap-2 text-md">
@@ -96,7 +109,6 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      {errorMessage && <ToastContainer />}
     </div>
   );
 };
