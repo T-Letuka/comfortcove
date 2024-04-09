@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="pt-10 pb-15 w-full">
       <div className="border-2 border-[#FC0FC0] rounded-lg">
-        <div className="grid grid-cols-3 w-full ">
+        <div className="grid grid-cols-2 w-full ">
           <div className="mt-4">
             <Link
               to="/"
@@ -23,7 +23,6 @@ const Footer = () => {
             <p className="opacity-70 hover:underline hover:text-pink-600">
               Privacy and Policy
             </p>
-            <div></div>
           </div>
         </div>
       </div>
