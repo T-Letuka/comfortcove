@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const NavBar = () => {
   const path = useLocation().pathname;
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
