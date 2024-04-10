@@ -7,13 +7,13 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Posts from "./pages/Posts";
 import Header from "./Components/Header";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import Footer from "./Components/Footer";
 const App = () => {
   return (
     <BrowserRouter>
       <Header />
-      <Toaster />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -22,6 +22,7 @@ const App = () => {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/posts" element={<Posts />} />
       </Routes>
+      <Toaster />
       <Footer />
     </BrowserRouter>
   );

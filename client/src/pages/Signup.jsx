@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import OAuth from "../Components/OAuth";
 
 const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -100,6 +101,7 @@ const Signup = () => {
             >
               {loading ? <span className="pl-3">Loading...</span> : "Sign up"}
             </button>
+            <OAuth />
           </form>
           <div className="mt-5 flex gap-2 text-md">
             <span>Have an Account?</span>

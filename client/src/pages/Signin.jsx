@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signInStart,
   SignInSuccess,
   signInFailure,
 } from "../redux/user/useSlice";
+import OAuth from "../Components/OAuth";
 
 const Signin = () => {
   const [formData, setFormData] = useState({});
@@ -15,12 +15,6 @@ const Signin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (errorMessage) {
-      toast.error(errorMessage);
-    }
-  }, [errorMessage]);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
@@ -28,7 +22,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return dispatch(signInFailure("Pleasee fill all the fields"));
+      return dispatch(signInFailure("Please fill all the fields"));
     }
     try {
       dispatch(signInStart());
@@ -104,13 +98,19 @@ const Signin = () => {
             >
               {loading ? <span className="pl-3">Loading...</span> : "Sign In"}
             </button>
+            <OAuth />
           </form>
           <div className="mt-5 flex gap-2 text-md">
             <span>Don't Have an Account?</span>
-            <Link to="/sign-in" className="text-blue-500 hover:text-red-600">
+            <Link to="/sign-up" className="text-blue-500 hover:text-red-600">
               Sign up
             </Link>
           </div>
+          {errorMessage && (
+            <div className="mt-4 font-semibold text-red-400 text-[20px] tracking-widest text-center">
+              {errorMessage}
+            </div>
+          )}
         </div>
       </div>
     </div>
