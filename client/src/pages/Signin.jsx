@@ -20,13 +20,13 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!formData.email || !formData.password) {
       return setErrorMessage("Please fill out all fields");
     }
     try {
       setLoading(true);
       setErrorMessage(null);
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -37,7 +37,7 @@ const Signin = () => {
       }
       setLoading(false);
       if (res.ok) {
-        navigate("/sign-in");
+        navigate("/");
       }
     } catch (error) {
       setErrorMessage("An error occurred while signing up.");
@@ -59,7 +59,11 @@ const Signin = () => {
           <p className="text-md mt-8 mr-4">
             Step into our welcoming blog, designed to be your haven for
             guidance, emotional support, and discovering ways to overcome life's
-            hurdles
+            hurdles.
+            <br />
+            <span className="font-semibold">
+              You can sign in with your email and password, or with Google
+            </span>
           </p>
         </div>
         {/*right side*/}
@@ -96,8 +100,8 @@ const Signin = () => {
             </button>
           </form>
           <div className="mt-5 flex gap-2 text-md">
-            <span>Have an Account?</span>
-            <Link to="/sign-in" className="text-blue-500 hover:text-red-400">
+            <span>Don't Have an Account?</span>
+            <Link to="/sign-in" className="text-blue-500 hover:text-red-600">
               Sign up
             </Link>
           </div>
