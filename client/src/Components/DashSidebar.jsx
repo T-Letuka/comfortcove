@@ -13,8 +13,8 @@ const DashSidebar = () => {
     }
   }, [location.search]);
   return (
-    <div className="flex h-screen">
-      <div className="bg-[#F2F3F4] w-60">
+    <div className="flex">
+      <div className="bg-[#F2F3F4] md:w-60 md:h-screen w-full ">
         <h1 className="border-b-2 mt-2 mb-2 text-center tracking-widdest text-black font-semibold uppercase ">
           My SideBar
         </h1>
