@@ -2,11 +2,14 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiMagnifyingGlass, HiBars4 } from "react-icons/hi2";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const NavBar = () => {
   const path = useLocation().pathname;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -89,11 +92,17 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        <Link to="/sign-in">
+        {currentUser ? (
           <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
-            Sign In
+            Signed In
           </button>
-        </Link>
+        ) : (
+          <Link to="/sign-in">
+            <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+              Sign In
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
