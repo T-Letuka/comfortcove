@@ -65,11 +65,19 @@ const NavBar = () => {
                 </Link>
               </li>
             </ul>
-            <Link to="/sign-in" onClick={closeMenu}>
-              <button className="border border-[#000000] rounded-xl mx-3 my-5 px-3 py-3 bg-pink-100">
-                Sign In
-              </button>
-            </Link>
+            {currentUser ? (
+              <Link to="/dashboard">
+                <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+                  DashBoard
+                </button>
+              </Link>
+            ) : (
+              <Link to="/sign-in">
+                <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+                  Sign In
+                </button>
+              </Link>
+            )}
           </>
         )}
       </div>
@@ -93,9 +101,11 @@ const NavBar = () => {
           </li>
         </ul>
         {currentUser ? (
-          <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
-            Signed In
-          </button>
+          <Link to="/dashboard">
+            <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+              DashBoard
+            </button>
+          </Link>
         ) : (
           <Link to="/sign-in">
             <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
