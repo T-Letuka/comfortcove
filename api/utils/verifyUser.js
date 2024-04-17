@@ -4,7 +4,7 @@ import { handleError } from "./error.js";
 export const verifyUser = (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) {
-    return next(handleError(401, "could nathorized"));
+    return next(handleError(401, "could not authorized"));
   }
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
