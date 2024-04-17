@@ -10,6 +10,7 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  signoutSuccess,
 } from "../redux/user/useSlice";
 
 import { useDispatch } from "react-redux";
@@ -76,6 +77,22 @@ const DashProfile = () => {
       setUpdateUserError(data.message); //i duplicated error message(sorry)
     }
   };
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/user/signout", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="max-w-lg mx-auto p-2 w-full">
       <h1 className="uppercase tracking-widest font-semibold text-center py-8">
@@ -126,7 +143,10 @@ const DashProfile = () => {
         >
           Delete account
         </span>
-        <span className="cursor-pointer uppercase hover:underline">
+        <span
+          onClick={handleSignout}
+          className="cursor-pointer uppercase hover:underline"
+        >
           Sign out
         </span>
       </div>
