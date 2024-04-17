@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import icon from "./../assets/usericon.png";
 import { CgClose } from "react-icons/cg";
+import { Link } from "react-router-dom";
 import { BsExclamationCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import {
@@ -17,7 +18,7 @@ import { useDispatch } from "react-redux";
 
 const DashProfile = () => {
   const dispatch = useDispatch();
-  const { currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, loading } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
   const [updateUserComplete, setUpdateUserComplete] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
@@ -130,11 +131,22 @@ const DashProfile = () => {
           onChange={handleChange}
         />
         <button
-          className="self-center uppercase py-2 px-10 hover:underline 
-        border-2 border-pink-500 hover:border-[#8A2BE2] rounded-md"
+          className="self-center w-[50%] uppercase py-2 px-10 hover:underline 
+        border-4 border-pink-500 hover:border-[#8A2BE2] rounded-md"
+          disabled={loading}
         >
-          update
+          {loading ? "Loading..." : "Update"}
         </button>
+        {currentUser.isAdmin && (
+          <Link to={"/create-post"} className="flex flex-col">
+            <button
+              className="self-center w-[50%] uppercase py-2 px-10 hover:underline 
+        border-[5px] border-[#8A2BE2] hover:bg-[#8A2BE2]  hover:text-white rounded-md mb-4"
+            >
+              Create A post
+            </button>
+          </Link>
+        )}
       </form>
       <div className="text-red-500 flex justify-between mt-2 ">
         <span

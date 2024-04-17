@@ -10,6 +10,8 @@ import Header from "./Components/Header";
 import { Toaster } from "react-hot-toast";
 import Footer from "./Components/Footer";
 import PrivateRoute from "./Components/PrivateRoute";
+import OnlyAdminPrivateRoute from "./Components/OnlyAdminPrivateRoute";
+import CreatePost from "./pages/CreatePost";
 const App = () => {
   return (
     <BrowserRouter>
@@ -23,7 +25,10 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-        <Route path="/posts" element={<Posts />} />
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route path="/create-post" element={<CreatePost />} />
       </Routes>
       <Toaster />
       <Footer />
