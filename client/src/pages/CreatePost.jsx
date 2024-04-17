@@ -10,12 +10,16 @@ import {
 import { app } from "../Firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
+  const [publishError, setPublishError] = useState(null);
+  const navigate = useNavigate();
+
   const handleUploadImage = async () => {
     try {
       if (!file) {
@@ -51,12 +55,36 @@ const CreatePost = () => {
       console.log(error);
     }
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/post/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPublishError(data.message);
+        return;
+      }
+
+      if (res.ok) {
+        setPublishError(null);
+        navigate(`/post/${data.slug}`);
+      }
+    } catch (error) {
+      setPublishError("Something went wrong!");
+    }
+  };
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
       <h1 className=" underline text-center text-3xl my-7 font-semibold">
         Create a Post
       </h1>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <input
             type="text"
@@ -64,11 +92,17 @@ const CreatePost = () => {
             className="py-4 px-4 flex-1 border-2 tracking-widest"
             id="title"
             required
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
           />
           <select
             id="categories"
             name="categories"
             className="py-4 px-4 border"
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
           >
             <option value="uncategorized">Select A Category</option>
             <option value="relationships">Relationships</option>
@@ -104,7 +138,9 @@ const CreatePost = () => {
           </button>
         </div>
         {imageUploadError && (
-          <div className="text-red-600 font-semibold">{imageUploadError}</div>
+          <div className="text-red-600 font-semibold bg-red-100 p-3 rounded-md">
+            {imageUploadError}
+          </div>
         )}
         {formData.image && (
           <img
@@ -118,10 +154,18 @@ const CreatePost = () => {
           placeholder="Write Something..."
           className="h-72 mb-12"
           required
+          onChange={(value) => {
+            setFormData({ ...formData, content: value });
+          }}
         />
         <button className="w-full border-4 p-4 rounded-full text-xl font-semibold border-purple-900 hover:border-pink-600">
           Publish
         </button>
+        {publishError && (
+          <div className="font-semibold bg-red-200 text-red-700 rounded-md">
+            {publishError}
+          </div>
+        )}
       </form>
     </div>
   );
