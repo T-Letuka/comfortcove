@@ -12,17 +12,21 @@ const DashProfile = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
+  const [updateUserComplete, setUpdateUserComplete] = useState(null);
+  const [updateUserError, setUpdateUserError] = useState(null);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-    console.log(formData);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(formData).length === 0) {
+      setUpdateUserError("No changes Made!!");
       return;
     }
     try {
       dispatch(updateStart());
+
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "PUT",
         headers: {
@@ -33,14 +37,16 @@ const DashProfile = () => {
       const data = await res.json();
       if (!res.ok) {
         dispatch(updateFailure(data.message));
+        setUpdateUserError(data.message);
       } else {
         dispatch(updateSuccess(data));
+        setUpdateUserComplete("User updated Successfully !!");
       }
     } catch (error) {
       dispatch(updateFailure(error.message));
+      setUpdateUserError(data.message); //i duplicated error message(sorry)
     }
   };
-
   return (
     <div className="max-w-lg mx-auto p-2 w-full">
       <h1 className="uppercase tracking-widest font-semibold text-center py-8">
@@ -92,6 +98,16 @@ const DashProfile = () => {
           Sign out
         </span>
       </div>
+      {updateUserComplete && (
+        <div className="font-bold text-red-600 tracking-widest text-center mt-2">
+          {updateUserComplete}
+        </div>
+      )}
+      {updateUserError && (
+        <div className="font-bold text-lg tracking-widest text-center mt-2 text-blue-500">
+          {updateUserError}
+        </div>
+      )}
     </div>
   );
 };
