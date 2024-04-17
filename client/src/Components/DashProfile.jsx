@@ -1,19 +1,48 @@
 import React, { useState } from "react";
 import icon from "./../assets/usericon.png";
+import { CgClose } from "react-icons/cg";
+import { BsExclamationCircle } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import {
   updateStart,
   updateSuccess,
   updateFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../redux/user/useSlice";
+
 import { useDispatch } from "react-redux";
 
 const DashProfile = () => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
   const [updateUserComplete, setUpdateUserComplete] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+  const handleDelete = async () => {
+    setShowModal(false);
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        dispatch(deleteUserFailure(data.message));
+      } else {
+        dispatch(deleteUserSuccess(data.message));
+      }
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -91,7 +120,10 @@ const DashProfile = () => {
         </button>
       </form>
       <div className="text-red-500 flex justify-between mt-2 ">
-        <span className="cursor-pointer uppercase hover:underline">
+        <span
+          onClick={toggleModal}
+          className="cursor-pointer uppercase hover:underline"
+        >
           Delete account
         </span>
         <span className="cursor-pointer uppercase hover:underline">
@@ -106,6 +138,37 @@ const DashProfile = () => {
       {updateUserError && (
         <div className="font-bold text-lg tracking-widest text-center mt-2 text-blue-500">
           {updateUserError}
+        </div>
+      )}
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-10 bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-md">
+            <h1 className="flex justify-end mb-5">
+              <CgClose onClick={toggleModal} size={25} />
+            </h1>
+            <span className="flex justify-center mt-2 mb-4 items-center">
+              <BsExclamationCircle size={60} color="red" />
+            </span>
+
+            <p className="mb-[50px] uppercase opacity-70 text-[18px]">
+              Are you sure you want to delete this user?
+            </p>
+            <div className="flex justify-center gap-[40px]">
+              <button
+                onClick={handleDelete}
+                className="bg-[#FF0800] text-white py-3 font-semibold px-4 rounded-md hover:underline"
+              >
+                Delete
+              </button>
+              <button
+                onClick={toggleModal}
+                className="bg-gray-300 text-black py-3 px-4 rounded-md hover:bg-black hover:text-white"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
