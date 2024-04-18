@@ -13,5 +13,5 @@ export default {
     "custom-sm": "500px",
     "custom-lg": "1200px",
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
