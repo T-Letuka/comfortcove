@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import CallToAction from "../Components/CallToAction";
+import CommentSection from "../Components/CommentSection";
 
 const Posts = () => {
   const { postSlug } = useParams();
@@ -64,6 +66,10 @@ const Posts = () => {
         className="p-3 max-w-2xl mx-auto w-full mt-2 post-content"
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
+      <div className="max-w-4xl mx-auto w-full mt-5">
+        <CallToAction />
+      </div>
+      <CommentSection postId={post._id} />
     </main>
   );
 };
