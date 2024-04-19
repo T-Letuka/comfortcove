@@ -30,6 +30,7 @@ const App = () => {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
+        <Route path="/post/:postSlug" element={<Posts />} />
       </Routes>
       <Toaster />
       <Footer />

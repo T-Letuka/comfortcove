@@ -34,12 +34,7 @@ const UpdatePost = () => {
           return;
         }
         const post = data.posts[0];
-        setFormData({
-          title: post.title,
-          category: post.category,
-          content: post.content,
-          image: post.image,
-        });
+
         if (res.ok) {
           setPublishError(null);
           setFormData(data.posts[0]);
