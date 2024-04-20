@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import message from "./../assets/usericon.png";
+import { AiFillHeart } from "react-icons/ai";
+import { useSelector } from "react-redux";
+
 import moment from "moment";
 
-const Comments = ({ comment }) => {
+const Comments = ({ comment, onLike }) => {
   const [user, setUser] = useState({});
+  const { currentUser } = useSelector((state) => state.user);
   console.log(user);
   useEffect(() => {
     const getUser = async () => {
@@ -38,6 +42,24 @@ const Comments = ({ comment }) => {
           </span>
         </div>
         <p className="text-gray-600 pb-2 font-serif">{comment.content}</p>
+        <div className="flex items-center gap-2 pt-2 text-xs border-t max-w-fit">
+          <button
+            onClick={() => onLike(comment._id)}
+            className={`text-red-300 text-xl hover:text-[#FF0800] hover:text-2xl ${
+              currentUser &&
+              comment.likes.includes(currentUser._id) &&
+              "!text-[#8A2BE2]"
+            }`}
+          >
+            <AiFillHeart />
+          </button>
+          <p className="text-gray-400">
+            {comment.numberOfLikes > 0 &&
+              comment.numberOfLikes +
+                " " +
+                (comment.numberOfLikes === 1 ? "like" : "Likes")}
+          </p>
+        </div>
       </div>
     </div>
   );
