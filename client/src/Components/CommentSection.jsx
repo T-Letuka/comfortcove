@@ -3,14 +3,21 @@ import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import message from "./../assets/usericon.png";
 import Comments from "./Comments";
+import { CgClose } from "react-icons/cg";
+import { BsExclamationCircle } from "react-icons/bs";
 
 const CommentSection = ({ postId }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState(" ");
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
+  const [commentToDelete, setCommentToDelete] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,6 +91,26 @@ const CommentSection = ({ postId }) => {
       console.log(error.message);
     }
   };
+  const handleDelete = async (commentId) => {
+    setShowModal(false);
+    try {
+      if (!currentUser) {
+        navigate("/sign-in");
+        return;
+      }
+      const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setComments((prevComments) =>
+          prevComments.filter((comment) => comment._id !== commentId)
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
@@ -151,9 +178,47 @@ const CommentSection = ({ postId }) => {
             </div>
           </div>
           {comments.map((comment) => (
-            <Comments key={comment._id} comment={comment} onLike={handleLike} />
+            <Comments
+              key={comment._id}
+              comment={comment}
+              onLike={handleLike}
+              onDelete={(commentId) => {
+                setShowModal(true);
+                setCommentToDelete(commentId);
+              }}
+            />
           ))}
         </>
+      )}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-10 bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-md">
+            <h1 className="flex justify-end mb-5">
+              <CgClose onClick={toggleModal} size={25} />
+            </h1>
+            <span className="flex justify-center mt-2 mb-4 items-center">
+              <BsExclamationCircle size={60} color="red" />
+            </span>
+
+            <p className="mb-[50px] uppercase opacity-70 text-[18px]">
+              Are you sure you want to delete this Comment?
+            </p>
+            <div className="flex justify-center gap-[40px]">
+              <button
+                onClick={() => handleDelete(commentToDelete)}
+                className="bg-[#FF0800] text-white py-3 font-semibold px-4 rounded-md hover:underline"
+              >
+                Delete
+              </button>
+              <button
+                onClick={toggleModal}
+                className="bg-gray-300 text-black py-3 px-4 rounded-md hover:bg-black hover:text-white"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

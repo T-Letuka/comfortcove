@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import message from "./../assets/usericon.png";
 import { AiFillHeart } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { AiFillDelete } from "react-icons/ai";
 
 import moment from "moment";
 
-const Comments = ({ comment, onLike }) => {
+const Comments = ({ comment, onLike, onDelete }) => {
   const [user, setUser] = useState({});
   const { currentUser } = useSelector((state) => state.user);
-  console.log(user);
+
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -59,6 +60,17 @@ const Comments = ({ comment, onLike }) => {
                 " " +
                 (comment.numberOfLikes === 1 ? "like" : "Likes")}
           </p>
+          {currentUser &&
+            (currentUser._id === comment.userId || currentUser.isAdmin) && (
+              <>
+                <button
+                  onClick={() => onDelete(comment._id)}
+                  className="text-gray-400 hover:text-red-500 text-xl"
+                >
+                  <AiFillDelete />
+                </button>
+              </>
+            )}
         </div>
       </div>
     </div>
