@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { BsArrowBarRight } from "react-icons/bs";
 import { signoutSuccess } from "../redux/user/useSlice";
 import { CgFileDocument } from "react-icons/cg";
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser, AiOutlinePieChart } from "react-icons/ai";
 import { HiOutlineUsers } from "react-icons/hi";
 import { LiaCommentsSolid } from "react-icons/lia";
 import { useSelector } from "react-redux";
@@ -54,6 +54,16 @@ const DashSidebar = () => {
               </span>
             </li>
           </Link>
+          {currentUser && currentUser.isAdmin && (
+            <Link to="/dashboard?tab=dash">
+              <li className="py-2 text-[18px] px-4 rounded-md hover:bg-gray-400 cursor-pointer text-center">
+                <span className="flex items-center justify-center gap-2">
+                  <AiOutlinePieChart size={20} />
+                  DashBoard
+                </span>
+              </li>
+            </Link>
+          )}
           {currentUser.isAdmin && (
             <Link to="/dashboard?tab=posts">
               <li className="py-2 text-[18px] px-4 rounded-md hover:bg-gray-400 cursor-pointer text-center">

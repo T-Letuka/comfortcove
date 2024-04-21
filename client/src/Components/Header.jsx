@@ -36,38 +36,38 @@ const NavBar = () => {
         >
           <HiBars4 className="w-6 h-6" />
         </button>
+        {currentUser ? (
+          <Link to="/dashboard">
+            <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+              DashBoard
+            </button>
+          </Link>
+        ) : (
+          <Link to="/sign-in">
+            <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+              Sign In
+            </button>
+          </Link>
+        )}
         {isMenuOpen && (
           <>
             <ul className="absolute top-full left-0 mt-2 bg-white border rounded shadow-lg p-3">
-              <li>
+              <li className="p-1 hover:bg-pink-600 hover:font-bold">
                 <Link to="/" onClick={closeMenu}>
                   Home
                 </Link>
               </li>
-              <li>
+              <li className="p-1 hover:bg-pink-600 hover:font-bold">
                 <Link to="/about" onClick={closeMenu}>
                   About
                 </Link>
               </li>
-              <li>
+              <li className="p-1 hover:bg-pink-600 hover:font-bold">
                 <Link to="/postpage" onClick={closeMenu}>
                   Posts
                 </Link>
               </li>
             </ul>
-            {currentUser ? (
-              <Link to="/dashboard">
-                <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
-                  DashBoard
-                </button>
-              </Link>
-            ) : (
-              <Link to="/sign-in">
-                <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
-                  Sign In
-                </button>
-              </Link>
-            )}
           </>
         )}
       </div>

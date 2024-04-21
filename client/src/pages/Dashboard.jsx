@@ -6,6 +6,7 @@ import DashboardPost from "../Components/DashboardPost";
 import DashUser from "../Components/DashUser";
 import DashComments from "../Components/DashComments";
 import DashboardOverview from "../Components/DashboardOverview";
+import DashPicture from "../Components/DashPicture";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -25,6 +26,7 @@ const Dashboard = () => {
       </div>
       <div className="md:flex-1">
         {/*right side */}
+        {!tab && <DashPicture />}
         {tab === "profile" && <DashProfile />}
         {/*posts */}
         {tab === "posts" && <DashboardPost />}

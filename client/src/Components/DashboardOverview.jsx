@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import message from "./../assets/dash.png";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -7,6 +8,7 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi";
+import DashPicture from "./DashPicture";
 
 const DashboardOverview = () => {
   const [users, setUsers] = useState([]);
@@ -117,6 +119,9 @@ const DashboardOverview = () => {
             </span>
             <div className="text-gray-500">Last month</div>
           </div>
+        </div>
+        <div className="w-full">
+          <DashPicture />
         </div>
       </div>
     </div>
