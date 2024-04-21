@@ -14,6 +14,7 @@ import OnlyAdminPrivateRoute from "./Components/OnlyAdminPrivateRoute";
 import CreatePost from "./pages/CreatePost";
 import UpdatePost from "./pages/UpdatePost";
 import ScrollToTop from "./Components/ScrollToTop";
+import PostPage from "./pages/PostPage";
 const App = () => {
   return (
     <BrowserRouter>
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
+        <Route path="/postpage" element={<PostPage />} />
         <Route path="/post/:postSlug" element={<Posts />} />
       </Routes>
       <Toaster />

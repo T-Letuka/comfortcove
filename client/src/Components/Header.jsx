@@ -24,20 +24,10 @@ const NavBar = () => {
       <div className="my-4 flex gap-3 sm:gap-6 md:gap-8">
         <Link
           to="/"
-          className="bg-gradient-to-r from-[#a2d2ff] via-[#caf0f8] to-[#ffc8dd] border rounded-[12px] px-2 py-2 text mx-2 my-1 font-semibold"
+          className="bg-black  text-white border rounded-[12px] px-2 py-2 text mx-2 my-1 font-semibold"
         >
           Comfort cove
         </Link>
-        <form className="hidden lg:flex">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="border border-[#ffafcc] rounded-[12px] my-2 py-2 px-2"
-          />
-        </form>
-        <button className="w-10 h-10 bg-gray-100 border-[#ffafcc] rounded my-2 py-2 px-2 lg:hidden">
-          <HiMagnifyingGlass className="w-8" />
-        </button>
       </div>
       <div className="relative lg:hidden">
         <button
@@ -60,7 +50,7 @@ const NavBar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/posts" onClick={closeMenu}>
+                <Link to="/postpage" onClick={closeMenu}>
                   Posts
                 </Link>
               </li>
@@ -95,7 +85,7 @@ const NavBar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/posts" className="text-black hover:text-[#ff006e]">
+            <Link to="/postpage" className="text-black hover:text-[#ff006e]">
               Posts
             </Link>
           </li>
