@@ -75,8 +75,12 @@ const Posts = () => {
         className="p-3 w-[50%] self-center mt-10 h-[50%] shadow-sm border border-gray-100 shadow-gray-100"
       />
       <div className=" mx-auto w-1/2 max-w-2xl flex justify-between p-3 border border-gray-100 text-md font-semibold opacity-85">
-        <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
-        <span>{post && (post.content.length / 1000).toFixed(0)} mins read</span>
+        <span className="text-sm">
+          {post && new Date(post.createdAt).toLocaleDateString()}
+        </span>
+        <span className="text-sm">
+          {post && (post.content.length / 1000).toFixed(0)} mins read
+        </span>
       </div>
       <div
         className="p-3 max-w-2xl mx-auto w-full mt-2 post-content"

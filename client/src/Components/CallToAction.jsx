@@ -19,11 +19,8 @@ const CallToAction = () => {
           className="rounded-xl w-full text-white bg-gradient-to-r from-[#8A2BE2] 
         via-[#702963] to-[#B53389] border py-2 font-bold tracking-wide"
         >
-          <Link to="/posts">Go To Posts</Link>
+          <Link to="/postpage">Go To Posts</Link>
         </button>
-      </div>
-      <div className="p-6 flex-1">
-        <img src={message} alt="an image" className="w-[50%] h-[50%] mx-auto" />
       </div>
     </div>
   );

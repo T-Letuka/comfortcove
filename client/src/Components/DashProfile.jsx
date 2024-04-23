@@ -131,7 +131,7 @@ const DashProfile = () => {
           onChange={handleChange}
         />
         <button
-          className="self-center w-[50%] uppercase py-2 px-10 hover:underline 
+          className="self-center w-[50%] uppercase py-2 px-5 hover:underline 
         border-4 border-pink-500 hover:border-[#8A2BE2] rounded-md"
           disabled={loading}
         >
@@ -140,7 +140,7 @@ const DashProfile = () => {
         {currentUser.isAdmin && (
           <Link to={"/create-post"} className="flex flex-col">
             <button
-              className="self-center w-[50%] uppercase py-2 px-10 hover:underline 
+              className="self-center text-sm w-[50%] uppercase py-2 px-5 hover:underline 
         border-[5px] border-[#8A2BE2] hover:bg-[#8A2BE2]  hover:text-white rounded-md mb-4"
             >
               Create A post

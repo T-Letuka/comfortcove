@@ -109,6 +109,7 @@ const CreatePost = () => {
             <option value="positive-thinking">Positive Thinking</option>
             <option value="coping-mechanism">Coping Mechanism</option>
             <option value="life-transitions">Life Transition</option>
+            <option value="life-general">Life In General</option>
           </select>
         </div>
         <div className="flex gap-4 items-center justify-between  border-4 border-pink-300 border-dotted p-3">
@@ -123,7 +124,7 @@ const CreatePost = () => {
           <button
             onClick={handleUploadImage}
             disabled={imageUploadProgress}
-            className="p-4 text-[18px] font-semibold border-4 border-[#FFC0CB] rounded-lg  hover:border-purple-800"
+            className="p-4 text-[18px] font-semibold border-4 border-[#FFC0CB] rounded-lg disabled:cursor-not-allowed hover:border-purple-800"
           >
             {imageUploadProgress ? (
               <div className="w-16 h-16">
@@ -133,7 +134,7 @@ const CreatePost = () => {
                 />
               </div>
             ) : (
-              "Upload Image"
+              "Upload"
             )}
           </button>
         </div>
@@ -158,7 +159,7 @@ const CreatePost = () => {
             setFormData({ ...formData, content: value });
           }}
         />
-        <button className="w-full border-4 p-4 rounded-full text-xl font-semibold border-purple-900 hover:border-pink-600">
+        <button className="w-full border-4 p-4 mt-4 rounded-full text-xl font-semibold border-purple-900 hover:border-pink-600">
           Publish
         </button>
         {publishError && (

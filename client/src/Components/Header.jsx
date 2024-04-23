@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <div className="border-b-2 flex flex-wrap justify-between items-center">
-      <div className="my-4 flex gap-3 sm:gap-6 md:gap-8">
+      <div className="my-4 flex gap-4 sm:gap-6 md:gap-8">
         <Link
           to="/"
           className="bg-black  text-white border rounded-[12px] px-2 py-2 text mx-2 my-1 font-semibold"
@@ -29,17 +29,17 @@ const NavBar = () => {
           Comfort cove
         </Link>
       </div>
-      <div className="relative lg:hidden">
+      <div className="relative lg:hidden flex items-center">
         <button
-          className="bg-gray-100 border-[#ffafcc] rounded my-2 py-2 px-2 mx-10"
+          className=" border-[#ffafcc] rounded my-2 py-2 px-2 mx-6 "
           onClick={toggleMenu}
         >
-          <HiBars4 className="w-6 h-6" />
+          <HiBars4 className="w-10 h-10 " />
         </button>
         {currentUser ? (
           <Link to="/dashboard">
-            <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
-              DashBoard
+            <button className="border-4 border-[#d00000] text-sm rounded-xl mx-2 my-5 px-3 py-3 sm:mx-8 hover:border-[#03045e]">
+              dashboard
             </button>
           </Link>
         ) : (
@@ -92,7 +92,7 @@ const NavBar = () => {
         </ul>
         {currentUser ? (
           <Link to="/dashboard">
-            <button className="border-4 border-[#d00000] rounded-xl mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
+            <button className="border-4 border-[#d00000] rounded-xl  mx-6 my-5 px-3 py-3 hover:border-[#03045e]">
               DashBoard
             </button>
           </Link>
