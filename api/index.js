@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.listen(3000, () => {
   console.log("Server is running perfectly on port 3000");
 });
-
+app.get("/", (req, res) => res.send("Express on Vercel"));
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
